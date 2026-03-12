@@ -1,11 +1,555 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lena & Tista Wedding's Invit</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Wedding of Lena & Tista</title>
+
+    <link rel="shortcut icon" href="./Assets/img/count-date-loc/wedding-stage-icon.svg" />
+
+    <!-- <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="bg-main font-body text-base overflow-x-hidden">
+
+    <!-- =============================================
+        DESKTOP WRAPPER — konten utama max-w-[768px]
+        Opening di luar wrapper supaya bisa full viewport
+        ============================================= -->
+
+    <!-- AUDIO -->
+    <audio id="bg-audio" loop>
+        <source src="./Assets/music/DAY6 - 둘도 아닌 하나 Only.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Music Button — fixed, ikut wrapper di desktop -->
+    <!-- <div id="music-wrapper" class="fixed bottom-6 right-0 z-50 w-full max-w-[768px] left-1/2 -translate-x-1/2 pointer-events-none" style="display:none"> -->
+    <div id="music-wrapper" class="fixed bottom-6 z-50 pointer-events-none w-full max-w-[768px] left-1/2 -translate-x-1/2 md:max-w-none md:left-auto md:translate-x-0 md:right-6" style="display:none">
+        <button id="music-btn" class="absolute bottom-0 right-4 pointer-events-auto w-11 h-11 rounded-full bg-white flex items-center justify-center shadow-lg transition-transform hover:scale-110" title="Play/Pause Music">
+        <img id="music-icon" src="./Assets/img/mute-icon.svg" alt="music" class="w-5 h-5" />
+        </button>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="toast"></div>
+
+
+    <!-- =============================================
+        1. OPENING — full viewport (fixed, di luar wrapper)
+        ============================================= -->
+    <section id="opening" class="fixed inset-0 z-40 bg-[#fbf0da] flex items-center justify-center">
+
+        <div class="opening-card relative w-full h-full bg-[#053827] overflow-hidden text-center flex flex-col items-center justify-center px-6">
+
+            <!-- ARCH SHAPE -->
+            <!-- <div class="opening-arch absolute top-0 left-0 w-full h-[45%] bg-[#053827]"></div> -->
+
+            <!-- CONTENT -->
+            <div class="relative z-10 flex flex-col items-center" data-aos="fade-up">
+
+                <p class="text-[#fbf0da] text-3xl md:text-4xl tracking-widest mb-6">The Wedding Of</p>
+
+                <img src="./Assets/img/opening-card/Signature.2.png" class="w-64 md:w-80 mb-6" />
+
+                <p class="text-[#fbf0da] text-3xl md:text-4xl tracking-[0.2em] mb-10">11.04.2026</p>
+
+                <p class="italic text-[#fbf0da] text-base mb-1">Kepada Yth.</p>
+
+                <p class="font-semibold text-[#fbf0da] text-lg mb-6">Tamu Undangan</p>
+
+                <!-- <span class="text-[#c9a84c] text-xl mb-6"> - ❧ - </span> -->
+                <img src="./Assets/img/opening-card/liner.png" alt="line" class="w-104 mb-6" />
+
+                <button onclick="bukaUndangan()"
+                class="flex items-center gap-2 bg-[#fbf0da] text-[#053827] px-8 py-3 rounded-full shadow-md hover:scale-105 transition">
+                    <img src="./Assets/img/opening-card/envelope-icon.svg" class="w-5">
+                    Buka Undangan
+                </button>
+
+            </div>
+
+            <!-- BATIK -->
+            <img src="./Assets/img/opening-card/batik-corner-down-left.svg"
+            class="absolute bottom-0 left-0 w-40 md:w-72" data-aos="fade-right">
+
+            <img src="./Assets/img/opening-card/batik-corner-down-right.svg"
+            class="absolute bottom-0 right-0 w-40 md:w-72" data-aos="fade-left">
+
+            <!-- FLOWERS -->
+            <img src="./Assets/img/opening-card/flower-down-left.svg"
+            class="absolute bottom-12 -left-16 md:-left-24 w-48 md:w-72 translate-y-6" data-aos="fade-right">
+
+            <img src="./Assets/img/opening-card/flower-down-right.svg"
+            class="absolute bottom-12 -right-16 md:-right-24 w-48 md:w-72 translate-y-6" data-aos="fade-left">
+
+        </div>
+
+    </section>
+
+
+    <!-- =============================================
+        MAIN CONTENT — max-w-[768px] centered
+        ============================================= -->
+    <div id="main-content" class="hidden mx-auto relative">
+
+        <!-- ============ 2. HERO ============ -->
+        <section id="hero" class="bg-[#fbf0da] overflow-hidden min-h-screen flex flex-col items-center relative isolate">
+            
+            <!-- TOP FLOWER CORNER -->
+            <div class="absolute top-0 left-0 w-full flex justify-between pointer-events-none z-20">
+                <img src="./Assets/img/hero/flower-corner-upper-left.svg" class="w-32 md:w-56 h-auto" data-aos="fade-left"/>
+                <img src="./Assets/img/hero/flower-corner-upper-right.svg" class="w-32 md:w-56 h-auto" data-aos="fade-right"/>
+            </div>
+
+            <!-- HOUSE BG -->
+            <img src="./Assets/img/hero/side-house.svg" class="absolute top-16 md:top-8 left-1/2 -translate-x-1/2 w-[500%] md:w-[600px] pointer-events-none" data-aos="fade-up"/>
+            <!-- class="absolute top-16 md:-top-24 object-cover object-top pointer-events-none" /> -->
+
+            <!-- Couple illustration w-full-->
+            <div class="relative z-10 flex justify-center pt-10 md:pt-8">
+                <img src="./Assets/img/hero/bridegroom.svg" alt="Lena dan Tista" class="w-[85%] max-w-[380px] md:max-w-[460px]" data-aos="fade-up"/>
+                <!-- class="w-full max-w-[480px] h-auto object-contain object-bottom" style="max-height: 55vh;" -->
+            </div>
+
+            <!-- Oval emerald card -->
+            <div class="relative z-10 w-full bottom-0 bg-emerald px-8 pt-16 pb-14 text-center hero-oval -mt-20 md:-mt-1" data-aos="fade-up">
+                <p class="font-heading text-[#fbf0da] text-lg md:text-xl tracking-widest mb-3">The Wedding Of</p>
+                
+                <img src="./Assets/img/hero/Signature.2.png" alt="Lena & Tista" class="w-24 max-md:w-90 mb-6 mx-auto h-auto" />
+
+                <p class="font-body text-[#fbf0da] text-lg md:text-xl mb-6">Sabtu, 11 April 2026</p>
+
+                <div class="flex flex-col items-center gap-1 opacity-80">
+                    <span class="font-body italic text-[#fbf0da] text-sm">Scroll Down</span>
+                    <img src="./Assets/img/hero/chevron-down-icon.svg" alt="" class="w-6 h-auto animate-bounce" />
+                </div>
+            </div>
+
+            <!-- Flowers bottom -->
+            <img src="./Assets/img/hero/flower-down-left.svg" class="absolute z-40 bottom-12 -left-16 md:-left-24 w-48 md:w-72 pointer-events-none" data-aos="fade-left"/>
+            <img src="./Assets/img/hero/flower-down-right.svg" class="absolute z-40 bottom-12 -right-16 md:-right-24 w-48 md:w-72 pointer-events-none" data-aos="fade-right" />
+
+            <!-- Batik bottom corners -->
+            <img src="./Assets/img/hero/batik-corner-down-left.svg" class="absolute z-30 bottom-0 left-0 w-40 md:w-72 pointer-events-none" data-aos="fade-left"/>
+            <img src="./Assets/img/hero/batik-corner-down-right.svg" class="absolute z-30 bottom-0 right-0 w-40 md:w-72 pointer-events-none" data-aos="fade-right"/>
+        </section>
+
+
+        <!-- ============ 3. BRIDE & GROOM ============ -->
+        <section id="bride-groom" class="bg-[#fbf0da] overflow-hidden relative isolate py-16 flex flex-col items-center text-center">
+
+            <!-- Batik corners top -->
+            <img src="./Assets/img/bride-groom-recite/batik-corner-upper-left.svg" class="absolute top-0 left-0 w-40 md:w-72 pointer-events-none">
+            <img src="./Assets/img/bride-groom-recite/batik-corner-upper-right.svg" class="absolute top-0 right-0 w-40 md:w-72 pointer-events-none">
+
+            <!-- Side flower ornaments -->
+            <img src="./Assets/img/bride-groom-recite/flower-ornament-left.svg" class="absolute top-96 md:top-40 -left-16 md:-left-24 w-48 md:w-72 pointer-events-none">
+            <img src="./Assets/img/bride-groom-recite/flower-ornament-right.svg" class="absolute top-96 md:top-40 -right-16 md:-right-24 w-48 md:w-72 pointer-events-none">
+            <!-- <div class="absolute top-96 max-md:top-32 -left-16 md:-left-24 pointer-events-none">
+                <img src="./Assets/img/bride-groom-recite/flower-ornament-left.svg" alt="" class="w-48 md:w-72 h-auto" />
+            </div>
+            <div class="absolute top-96 max-md:top-32 -right-16 md:-right-24 pointer-events-none">
+                <img src="./Assets/img/bride-groom-recite/flower-ornament-right.svg" alt="" class="w-48 md:w-72 h-auto" />
+            </div> -->
+            <!-- FLOWERS -->
+            <img src="./Assets/img/opening-card/flower-down-left.svg"
+            class="absolute bottom-24 md:bottom-16 -left-16 md:-left-24 w-32 md:w-40 translate-y-6" data-aos="fade-right">
+
+            <img src="./Assets/img/opening-card/flower-down-right.svg"
+            class="absolute bottom-24 md:bottom-16 -right-16 md:-right-24 w-32 md:w-40 translate-y-6" data-aos="fade-left">
+
+            <!-- Content -->
+            <div class="px-8 relative z-10">
+            <!-- <div class="px-10 pb-10 text-center relative z-10"> -->
+
+                <!-- Bismillah -->
+                <img src="./Assets/img/bride-groom-recite/bismillah.svg" class="w-40 mx-auto mb-6">
+                <!-- <div class="mb-6" data-aos="zoom-in">
+                    <img src="./Assets/img/bride-groom-recite/bismillah.svg" alt="Bismillah" class="top-24 w-44 mx-auto h-auto" />
+                </div> -->
+
+                <p class="font-body italic text-base text-[#053827] max-w-xl mx-auto leading-relaxed"> Assalamu'alaikum Warahmatullahi Wabarakatuh<br><br>Dengan segala kerendahan hati, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri pernikahan kami</p>
+                <!-- <p class="font-body italic text-base leading-relaxed text-gray-700 mb-8" data-aos="fade-up">
+                Assalamu'alaikum Warahmatullahi Wabarakatuh<br /><br />
+                Dengan segala kerendahan hati, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri pernikahan kami,
+                </p> -->
+
+                <div class="flex flex-col items-center gap-8 md:flex-row md:gap-8" data-aos="fade-up">
+                    <!-- BRIDE -->
+                    <div data-aos="fade-up">
+                        <img src="./Assets/img/bride-groom-recite/bride.svg" class="w-48 h-56 mx-auto mb-4">
+                        
+                        <p class="font-script text-emerald text-5xl">Lena</p>
+                        <p class="font-heading text-emerald text-xl mb-1">Lena Fauziah Sholihah</p>
+                        <p class="font-body font-bold text-base text-gray-700 leading-relaxed">Putri terakhir dari Bapak Basri Darma Sasmita<br>& Ibu Nur Hasanah</p>
+                        <!-- <div class="relative w-48 h-56 mx-auto mb-3">
+                            <img src="./Assets/img/bride-groom-recite/bride.svg" alt="Pengantin Wanita" class="absolute inset-0 w-full h-full object-contain" />
+                        </div>
+                        <p class="font-script text-emerald text-5xl mb-1">Lena</p>
+                        <p class="font-heading text-emerald text-xl mb-1">Lena Fauziah Sholihah</p>
+                        <p class="font-body font-bold text-base text-gray-700 leading-relaxed">
+                            Putri terakhir dari Bapak Basri Darma Sasmita<br />&amp; Ibu Nur Hasanah
+                        </p> -->
+                    </div>
+                    
+                    <!-- AND -->
+                    <img src="./Assets/img/bride-groom-recite/and.svg" class="w-16 md:w-24 mx-auto h-auto" data-aos="zoom-in" />
+                    <!-- <div class="my-6" data-aos="zoom-in">
+                        <img src="./Assets/img/bride-groom-recite/and.svg" class="w-16 md:w-24 mx-auto h-auto mb-1" />
+                    </div> -->
     
+                    <!-- GROOM -->
+                    <div data-aos="fade-up">
+                        <img src="./Assets/img/bride-groom-recite/groom.svg" class="w-48 h-56 mx-auto mb-4">
+                        
+                        <p class="font-script text-emerald text-5xl">Tista</p>
+                        
+                        <p class="font-heading text-emerald text-xl mb-1">Purbatistha Kamadjaya Ubaydzillah</p>
+                        
+                        <p class="font-body font-bold text-base text-gray-700 leading-relaxed">Putra Kedua Bapak Dede Kurniawan<br>& Ibu Dewi Siti Haryati</p>
+
+                        <!-- <div class="relative w-48 h-56 mx-auto mb-3">
+                            <img src="./Assets/img/bride-groom-recite/groom.svg" alt="Pengantin Pria" class="absolute inset-0 w-full h-full object-contain" />
+                        </div>
+                        <p class="font-script text-emerald text-5xl mb-1">Tista</p>
+                        <p class="font-heading text-emerald text-xl mb-1">Purbatistha Kamadjaya Ubaydzillah</p>
+                        <p class="font-body font-bold text-base text-gray-700 leading-relaxed">
+                            Putra Kedua Bapak Dede Kurniawan<br />&amp; Ibu Dewi Siti Haryati
+                        </p> -->
+                    </div>
+                </div>
+            
+            </div>
+        </section>
+
+
+        <!-- ============ 4. QURAN VERSE ============ -->
+        <section id="quran-verse" class="bg-[#fbf0da] px-8 pb-24 relative overflow-hidden text-center">
+
+            <!-- Pembatas flower ornament -->
+            <img src="./Assets/img/bride-groom-recite/pembatas.svg" class="w-40 mx-auto mb-10" data-aos="zoom-in">
+
+            <!-- Verse box -->
+            <!-- <div class="border-2 border-emerald rounded-2xl px-6 py-7 relative" data-aos="fade-up">
+                <img src="./Assets/img/bride-groom-recite/framedoodle.svg" alt="" class="absolute inset-0 w-full h-full object-contain" />
+                <p class="font-body italic text-base leading-[1.9] text-center text-gray-700">
+                "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sungguh, pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir."
+                </p>
+                <p class="font-body font-bold italic text-base text-center text-gray-700 mt-3">(QS Ar-Rum:21).</p>
+
+                ##Corner flower
+                <img src="./Assets/img/bride-groom-recite/flower-down-right.svg" alt="" class="absolute -bottom-8 -right-4 w-20 h-auto pointer-events-none" />
+            </div> -->
+            <div class="relative max-w-[320px] md:max-w-[420px] mx-auto">
+                <!-- frame -->
+                <img src="./Assets/img/bride-groom-recite/framedoodle.svg" class="w-full h-auto pointer-events-none">
+                <!-- text -->
+                <div class="absolute inset-0 flex items-center justify-center px-10 py-8 text-center">
+                    <div>
+                        <p class="font-body italic text-[10px] md:text-sm text-gray-700 leading-relaxed">"Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sungguh, pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir."</p>
+                        <p class="font-body font-bold italic text-[10px] md:text-sm text-gray-700 mt-2">(QS Ar-Rum:21)</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- HOUSE BG -->
+            <img src="./Assets/img/bride-groom-recite/side-house.svg" class="absolute bottom-0 left-0 w-[50%] md:w-[500px] pointer-events-none">
+        </section>
+
+
+        <!-- ============ 5. COUNTDOWN ============ -->
+        <section id="countdown" class="bg-[#fbf0da] pt-12 text-center overflow-hidden">
+
+            <!-- Wedding stage icon -->
+            <div data-aos="zoom-in">
+                <img src="./Assets/img/count-date-loc/wedding-stage-icon.svg" alt="" class="w-20 mx-auto h-auto mb-4 pb-12" />
+            </div>
+
+            <h2 class="font-heading text-emerald text-2xl md:text-4xl mb-7" data-aos="fade-down">MENUJU HARI BAHAGIA</h2>
+
+            <!-- Timer -->
+            <div class="flex justify-center items-start gap-1 mb-4" data-aos="zoom-in">
+                <div class="flex flex-col items-center">
+                <span id="cd-days" class="font-heading text-emerald text-5xl leading-none min-w-[58px]">00</span>
+                <span class="font-heading text-emerald text-[16px] tracking-widest mt-1">HARI</span>
+                </div>
+                <span class="font-heading text-emerald text-5xl leading-none px-0.5">:</span>
+                <div class="flex flex-col items-center">
+                <span id="cd-hours" class="font-heading text-emerald text-5xl leading-none min-w-[58px]">00</span>
+                <span class="font-heading text-emerald text-[16px] tracking-widest mt-1">JAM</span>
+                </div>
+                <span class="font-heading text-emerald text-5xl leading-none px-0.5">:</span>
+                <div class="flex flex-col items-center">
+                <span id="cd-mins" class="font-heading text-emerald text-5xl leading-none min-w-[58px]">00</span>
+                <span class="font-heading text-emerald text-[16px] tracking-widest mt-1">MENIT</span>
+                </div>
+                <span class="font-heading text-emerald text-5xl leading-none px-0.5">:</span>
+                <div class="flex flex-col items-center">
+                <span id="cd-secs" class="font-heading text-emerald text-5xl leading-none min-w-[58px]">00</span>
+                <span class="font-heading text-emerald text-[16px] tracking-widest mt-1">DETIK</span>
+                </div>
+            </div>
+
+            <p class="font-body italic text-base text-gray-600 leading-relaxed max-w-xl mx-auto mb-8 px-4" data-aos="fade-up">
+                Hari istimewa dalam hidup kami akan segera tiba!<br>
+                Merupakan suatu kehormatan bagi kami untuk dapat bertemu dan merayakan momen bahagia ini bersama Anda pada:
+            </p>
+
+            <!-- Arch bottom emerald -->
+            <div class="bg-emerald rounded-t-[50%] pt-10 pb-10 px-8 text-center item-center relative" data-aos="fade-up">
+
+                <img src="./Assets/img/count-date-loc/wedding-table-icon.svg" alt="" class="w-14 mx-auto h-auto mb-4" />
+
+                <p class="font-heading text-[#fbf0da] text-2xl md:text-4xl mb-7">Sabtu, 11 April 2026</p>
+
+                <div class="flex justify-center gap-14">
+                    <!-- Akad -->
+                    <div class="text-center">
+                        <img src="./Assets/img/count-date-loc/akad-icon.svg" alt="" class="w-12 mx-auto h-auto mb-2" />
+                        <p class="font-script text-[#fbf0da] text-2xl md:text-4xl mb-1">Akad</p>
+                        <p class="font-body text-[#fbf0da] text-base">08.00 – 10.00 WIB</p>
+                    </div>
+                    <!-- Resepsi -->
+                    <div class="text-center">
+                        <img src="./Assets/img/count-date-loc/reception-icon.svg" alt="" class="w-12 mx-auto h-auto mb-2" />
+                        <p class="font-script text-[#fbf0da] text-2xl md:text-4xl mb-1">Resepsi</p>
+                        <p class="font-body text-[#fbf0da] text-base">11.00 – 13.00 WIB</p>
+                    </div>
+                </div>
+                <!-- Flower garland strip -->
+                <img src="./Assets/img/count-date-loc/rangkaian_bunga.png" alt="" class="w-[300] md:w-[700] mx-auto h-auto bottom-0 z-20 pointer-events-none"/>
+
+            </div>
+        </section>
+        
+        
+        <!-- ============ 6. LOCATION ============ -->
+        <section id="location" class="relative text-center px-7 pt-12 pb-14 overflow-hidden" style="background: linear-gradient(180deg, #053827 0%, #6cb874 60%, #fbf0da 100%);">
+            
+            <!-- Flower rangkaian bottom -->
+            <img src="./Assets/img/count-date-loc/rangkaian-left.svg" alt="" class="absolute bottom-0 left-0 w-56 md:w-96 pointer-events-none" />
+            <img src="./Assets/img/count-date-loc/rangkaian-right.svg" alt="" class="absolute bottom-0 right-0 w-56 md:w-96 pointer-events-none" />
+
+            <img src="./Assets/img/count-date-loc/payung-icon.svg" alt="" class="w-14 mx-auto h-auto mb-4 pt-16" data-aos="zoom-in" />
+
+            <h2 class="font-heading text-[#fbf0da] text-2xl md:text-4xl mb-7" data-aos="fade-down">LOKASI</h2>
+
+            <p class="font-heading text-[#fbf0da] text-3xl mb-2" data-aos="fade-up">Gedung PPIB Bogor</p>
+            <p class="font-body font-bold italic text-[#fbf0da] text-base leading-relaxed mb-5" data-aos="fade-up">
+                Jl. Raya Pajajaran No.10, Kota Bogor, Jawa Barat
+            </p>
+
+            <div class="flex justify-center mb-5" data-aos="zoom-in">
+                <img src="./Assets/img/count-date-loc/rings-icon.svg" alt="" class="w-16 h-auto" />
+            </div>
+
+            <!-- Map embed -->
+            <div class="w-[80%] md:w-[50%] mx-auto bg-[#fbf0da] rounded-2xl overflow-hidden shadow-xl mb-5" data-aos="zoom-in">
+                <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d990.8290659372793!2d106.80911479999999!3d-6.607566599999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69c5e77c710065%3A0x88514bbe3e8884cc!2sPPIB%20Bogor!5e0!3m2!1sen!2sid!4v1773269865670!5m2!1sen!2sid"
+                class="w-full h-64 border-none block"
+                allowfullscreen loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Lokasi Gedung PPIB Bogor">
+                </iframe>
+            </div>
+
+            <a href="https://www.google.com/maps/place/PPIB+Bogor/@-6.6075666,106.8084711,19z/data=!3m1!4b1!4m6!3m5!1s0x2e69c5e77c710065:0x88514bbe3e8884cc!8m2!3d-6.6075666!4d106.8091148!16s%2Fg%2F11bc7pcbr_?entry=ttu&g_ep=EgoyMDI2MDMwOS4wIKXMDSoASAFQAw%3D%3D" target="_blank"
+                class="inline-flex items-center gap-2 bg-[#fbf0da] text-emerald font-body font-bold text-base px-7 py-3 rounded-full shadow-md hover:scale-105 transition-transform" data-aos="fade-up">
+                <img src="./Assets/img/gift/location-icon.svg" alt="" class="w-4 h-4" />
+                Buka di Google Maps
+            </a>
+        </section>
+
+
+        <!-- ============ 7. WEDDING GIFT ============ -->
+        <section id="gift" class="bg-[#fbf0da] px-8 pt-14 pb-14 text-center">
+            
+            <img src="./Assets/img/gift/gift-icon.svg" alt="" class="w-16 mx-auto h-auto pt-12 pb-12" data-aos="zoom-in" />
+
+            <h2 class="font-heading text-emerald text-2xl md:text-4xl mb-7" data-aos="fade-down">WEDDING GIFT</h2>
+
+            <p class="font-body italic text-base leading-relaxed text-gray-700 mb-8 max-w-xl mx-auto" data-aos="fade-up">
+                Doa Restu Anda merupakan karunia yang sangat berarti bagi kami.
+                Namun, jika Anda ingin memberikan tanda kasih sebagai pelengkap
+                kebahagiaan kami, dapat menyalurkannya melalui:
+            </p>
+
+            <!-- <div class="flex flex-col items-center gap-8 md:flex-row md:gap-8" data-aos="fade-up"> -->
+            <div class="flex flex-col items-center gap-6 md:flex-row md:justify-center" data-aos="fade-up">
+                <!-- Mandiri card -->
+                <div class="w-[80%] md:w-[30%] mx-auto" data-aos="fade-up">
+                    <div class="relative aspect-[1.58/1] rounded-2xl overflow-hidden shadow-xl">
+                        <img src="./Assets/img/gift/mandiri-card.png" alt="Bank Mandiri" class="absolute inset-0 w-full h-full object-cover" />
+                        <button onclick="copyText('1560021559739', this)" class="copy-btn absolute bottom-[12%] right-[6%] flex items-center gap-1.5 bg-[#737373] backdrop-blur text-white font-body text-sm md:text-base font-semibold px-3 py-2 rounded-lg hover:bg-emerald transition-colors shadow">
+                            <img src="./Assets/img/gift/copy-icon.svg" alt="" class="w-3.5 h-3.5" />
+                            <span>Salin</span>
+                        </button>
+                    </div>
+                </div>
+    
+                <!-- BRI card -->
+                <div class="w-[80%] md:w-[30%] mx-auto" data-aos="fade-up">
+                    <div class="relative aspect-[1.58/1] rounded-2xl overflow-hidden shadow-xl">
+                        <img src="./Assets/img/gift/bri-card.png" alt="Bank BRI" class="absolute inset-0 w-full h-full object-cover" />
+                        <button onclick="copyText('165801006618508', this)" class="copy-btn absolute bottom-[12%] right-[6%] flex items-center gap-1.5 bg-[#737373] backdrop-blur text-white font-body text-sm md:text-base font-semibold px-3 py-2 rounded-lg hover:opacity-85 transition-colors shadow">
+                            <img src="./Assets/img/gift/copy-icon.svg" alt="" class="w-3.5 h-3.5" />
+                            <span>Salin</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <p class="font-body italic text-base text-gray-500 mt-16 mb-1">Atau</p>
+            <p class="font-body font-bold italic text-base text-gray-700 mb-3">Dapat mengirimkan hadiah ke alamat berikut</p>
+
+            <!-- Address card -->
+            <div class="bg-gray-50 rounded-xl p-4 flex items-start gap-3 text-left w-[100%] md:w-[450px] mx-auto shadow-md" data-aos="fade-up">
+                <img src="./Assets/img/gift/location-icon.svg" alt="" class="w-6 h-6 flex-shrink-0" />
+                <p class="font-body text-xs text-gray-700 leading-relaxed flex-1">
+                    Jl. Paledang Kp. Kramat No. 3, RT. 03 / RW. 01,<br />
+                    BOGOR TENGAH, KOTA BOGOR, JAWA BARAT, 16121
+                </p>
+                <button onclick="copyText('Jl. Paledang Kp. Kramat No. 3, RT. 03/RW. 01, Bogor Tengah, Kota Bogor, Jawa Barat 16121', this)" class="copy-btn flex-shrink-0 flex items-center gap-1.5 bg-emerald text-[#fbf0da] font-body text-base font-semibold px-3 py-2 rounded-lg hover:opacity-85 transition-opacity shadow">
+                    <img src="./Assets/img/gift/copy-icon.svg" alt="" class="w-3.5 h-3.5" />
+                    <span>Salin</span>
+                </button>
+            </div>
+        </section>
+
+
+        <!-- ============ 8. RSVP ============ -->
+        <section id="rsvp" class="bg-[#fbf0da] px-7 pt-14 pb-12 text-center">
+
+            <img src="./Assets/img/rsvp/love-envelope-icon.svg" alt="" class="w-20 mx-auto h-auto mb-4 pb-12 pt-12" data-aos="zoom-in"/>
+
+            <h2 class="font-heading text-emerald text-2xl md:text-4xl mb-7" data-aos="fade-down">UNGKAPAN KEBAHAGIAAN ANDA</h2>
+            <p class="font-body italic text-base text-gray-600 leading-relaxed mb-8 max-w-xl mx-auto" data-aos="fade-up">
+                Kehadiran Anda adalah kado terindah bagi kami. Mohon konfirmasi
+                kehadiran Anda dan selipkan doa serta ucapan hangat untuk mengiringi
+                langkah baru kami melalui form di bawah ini
+            </p>
+
+            <!-- Form card -->
+            <div class="bg-white rounded-2xl px-6 py-7 shadow-md md:w-[40%] mx-auto" data-aos="zoom-in">
+                <div id="rsvp-form">
+
+                    <!-- Nama -->
+                    <div class="mb-5 text-left">
+                        <label class="font-body font-bold text-base md:text-xl text-gray-800 block mb-2" for="rsvp-name">Nama</label>
+                        <input id="rsvp-name" type="text" placeholder="Nama Anda"
+                        class="w-full border border-gray-300 rounded-xl px-4 py-3 font-body text-base text-gray-700 outline-none focus:border-emerald transition-colors" />
+                    </div>
+
+                    <!-- Kehadiran -->
+                    <div class="mb-5 text-left">
+                        <label class="font-body font-bold text-base md:text-xl text-gray-800 block mb-2">Kehadiran</label>
+                        <select id="rsvp-attendance" class="w-full border border-gray-300 rounded-xl px-4 py-3 font-body text-base text-gray-800 outline-none focus:border-emerald transition-colors bg-white appearance-none cursor-pointer">
+                            <option value="" disabled selected>-- Pilih kehadiran --</option>
+                            <option value="Saya Berencana Hadir!">Saya Berencana Hadir!</option>
+                            <option value="Saya Masih Ragu">Saya Masih Ragu</option>
+                            <option value="Maaf, Saya Tidak Bisa Hadir">Maaf, Saya Tidak Bisa Hadir</option>
+                        </select>
+                    </div>
+
+                    <!-- Pesan -->
+                    <div class="mb-5 text-left">
+                        <label class="font-body font-bold text-base md:text-xl text-gray-800 block mb-2" for="rsvp-message">Pesan Ucapan</label>
+                        <textarea id="rsvp-message" placeholder="Tulis doa dan ucapan Anda di sini..."
+                        class="w-full border border-gray-300 rounded-xl px-4 py-3 font-body text-base text-gray-700 outline-none focus:border-emerald transition-colors h-28 resize-none"></textarea>
+                    </div>
+
+                    <button id="btn-kirim" onclick="submitRSVP()"
+                        class="w-full bg-emerald text-[#fbf0da] font-body font-bold text-base py-3.5 rounded-full hover:opacity-90 hover:scale-[1.01] transition-all disabled:opacity-50">
+                        Kirim
+                    </button>
+                </div>
+
+                <!-- Success state -->
+                <div id="form-success" class="hidden text-center py-5">
+                    <div class="text-5xl mb-3">🎉</div>
+                    <p class="font-body font-bold text-emerald text-2xl">Terima kasih! Ucapan Anda telah terkirim.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============ 9. WALL OF WISHES ============ -->
+        <section id="wall-of-wishes" class="bg-white px-7 pt-10 pb-12">
+
+        <h2 class="font-heading text-emerald text-2xl md:text-4xl mb-7 pt-12 text-center" data-aos="fade-down">WALL OF WISHES</h2>
+
+        <div id="wow-count" class="flex items-center justify-center gap-2 font-body font-bold text-gray-800 text-base mb-6" data-aos="fade-up">
+            <img src="./Assets/img/rsvp/bubblechat-icon.svg" alt="" class="w-5 h-5" />
+            <span id="wow-count-text">Memuat...</span>
+        </div>
+
+        <div id="wishes-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[420px] overflow-y-auto scroll-smooth pr-2">
+            <div class="text-center font-body italic text-gray-400 py-8 col-span-full">Memuat ucapan...</div>
+        </div>
+        </section>
+
+
+        <!-- ============ 10. FOOTER ============ -->
+        <section id="footer" class="relative text-center overflow-hidden">
+  
+            <!-- Bagian atas: gradient cream → hijau -->
+            <div class="relative" style="background: linear-gradient(180deg, #fbf0da 0%, #6cb874 45%, #053827 100%);">
+                
+                <!-- Rumah background, fill penuh -->
+                <img src="./Assets/img/footer/frontside-house.svg" alt=""
+                class="absolute inset-0 w-full md:w-[55%] h-full mx-auto object-cover object-bottom pointer-events-none" />
+                
+                <!-- Couple illustration -->
+                <img src="./Assets/img/footer/bridegroom-lanein.svg" alt="Lena & Tista"
+                class="relative -bottom-45 md:-bottom-76 w-48 md:w-96 mx-auto" />
+                
+                <!-- Rangkaian bunga — overlap ke section bawah dengan negative margin -->
+                <img src="./Assets/img/footer/rangkaian-bunga.png" alt=""
+                class="relative z-20 w-full md:w-[700px] -mb-10 md:-mb-18  mx-auto pointer-events-none" />
+            </div>
+
+            <!-- Bagian bawah: full emerald -->
+            <div class="bg-[#053827] relative pt-4 pb-24 px-8 z-10">
+                
+                <h2 class="font-heading text-[#fbf0da] text-2xl md:text-4xl mb-1 mt-8 md:mt-16" data-aos="fade-up">THANK YOU</h2>
+                <img src="./Assets/img/opening-card/liner.png" alt="" class="w-48 mx-auto mb-5 h-auto" />
+                <p class="font-body italic text-[#fbf0da] text-xl mb-6">Best Regards,</p>
+                <img src="./Assets/img/opening-card/Signature.2.png" alt="Lena & Tista"
+                class="w-56 md:w-80 mx-auto mb-10" />
+
+                <!-- Batik corners — absolute ke seluruh section ini -->
+                <div class="absolute bottom-0 left-0 w-full flex justify-between pointer-events-none">
+                <img src="./Assets/img/footer/batik-corner-down-left.svg" class="w-40 md:w-72" />
+                <img src="./Assets/img/footer/batik-corner-down-right.svg" class="w-40 md:w-72" />
+                </div>
+
+                <!-- Bunga kiri kanan — overlap dari batik, posisi di atas batik -->
+                <img src="./Assets/img/opening-card/flower-down-left.svg"
+                class="absolute bottom-10 -left-10 md:-left-16 w-44 md:w-64 pointer-events-none" />
+                <img src="./Assets/img/opening-card/flower-down-right.svg"
+                class="absolute bottom-10 -right-10 md:-right-16 w-44 md:w-64 pointer-events-none" />
+            </div>
+
+        </section>
+
+        <footer class="bg-[#f6f6f6] relative text-center overflow-hidden py-2">
+            <p class="font-body italic bold text-black text-sm mt-1 mb-1 relative z-20">Made with luv by bride's niece 🫶</p>
+        </footer>
+    </div>
+    <!-- end #main-content -->
+
+    <!-- <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script> -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

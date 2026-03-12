@@ -1,0 +1,260 @@
+/* =============================================
+   TAILWIND CUSTOM CONFIG
+   (inline via CDN — menggunakan tailwind.config)
+   ============================================= */
+
+/* Load via <script> tag di head — tapi karena pakai CDN
+   kita extend lewat inline script di HTML.
+   File ini hanya untuk custom classes yang tidak bisa
+   ditangani Tailwind utility murni. */
+
+/* =============================================
+   CUSTOM FONTS
+   ============================================= */
+
+/*
+  Uncomment setelah file font tersedia di folder:
+  ./Assets/fonts/TanVivreLibre.woff2
+  ./Assets/fonts/BurguesScript.woff2
+*/
+
+@font-face {
+    font-family: 'Tan Vivre Libre';
+    src: url('./Assets/fonts/TAN-VIVRE-LIBRE-Regular.otf') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* @font-face {
+    font-family: 'Burgues Script';
+    src: url('./Assets/fonts/Burgues-Script.ttf') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+} */
+
+@font-face {
+    font-family: 'Sloop Script Pro';
+    src: url('./Assets/fonts/sloop-script-pro-bold.otf') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* =============================================
+   CSS VARIABLES
+   ============================================= */
+:root {
+    --bg-main:    #fbf0da;
+    --emerald:    #053827;
+    --green:      #6cb874;
+    --gold:       #c9a84c;
+    --crimson:    #8b1a2d;
+    --white:      #ffffff;
+    --light-grey: #f6f6f6;
+}
+
+/* =============================================
+   BASE
+   ============================================= */
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Inria Serif', Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Tailwind custom values (extended via CDN inline config — lihat <script> di index.html) */
+.font-heading  { font-family: 'Tan Vivre Libre', 'Georgia', serif; }
+.font-body     { font-family: 'Inria Serif', Georgia, serif; }
+/* .font-script   { font-family: 'Burgues Script', cursive; } */
+.font-script   { font-family: 'Sloop Script Pro', cursive; }
+.bg-emerald    { background-color: #053827; }
+.text-emerald  { color: #053827; }
+.border-emerald { border-color: #053827; }
+.focus\:border-emerald:focus { border-color: #053827; }
+.hover\:border-emerald:hover { border-color: #053827; }
+
+
+section {
+    margin: 0;
+    padding-top: 0;  /* pastikan tidak ada gap */
+    outline: 1px solid transparent; /* trick anti sub-pixel gap */
+}
+
+/* =============================================
+   OPENING ARCH
+   Arch shape: top rounded like Canva design
+   ============================================= */
+.opening-arch {
+    border-radius: 50% 50% 0 0 / 12% 12% 0 0;
+}
+
+/* =============================================
+   OPENING — hidden state (after button click)
+   ============================================= */
+#opening.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-20px);
+}
+
+/* =============================================
+   DESKTOP: body background when content is wider
+   Shows a neutral bg behind the 768px card
+   ============================================= */
+@media (min-width: 768px) {
+    body {
+        background-color: #2a2a2a;
+    }
+    #main-content {
+        box-shadow: 0 0 60px rgba(0, 0, 0, 0.4);
+    }
+    /* Opening stays full viewport on desktop */
+    #opening {
+        max-width: 100% !important;
+        width: 100vw;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+    .opening-arch {
+        /* border-radius: 50% 50% 0 0 / 12% 12% 0 0;
+        padding-top: 5rem;
+        padding-bottom: 4rem; */
+        height:50%;
+        border-radius:50% 50% 0 0 / 14% 14% 0 0;
+    }
+
+    .opening-card{
+        max-width:100%;
+        height:100vh;
+    }
+    
+    .hero-oval{
+    border-radius: 50% 50% 0 0 / 1% 1% 0 0;
+    }
+}
+
+
+.hero-oval{
+border-radius: 50% 50% 0 0 / 50% 50% 0 0;
+}
+
+
+/* =============================================
+ATTENDANCE OPTION 
+   ============================================= */
+.attendance-option.selected {
+    background-color: #053827;
+    color: #fbf0da;
+    border-color: #053827;
+}
+
+/* =============================================
+   WISH CARD — attendance badges
+   ============================================= */
+.wish-attendance-badge {
+    display: inline-block;
+    font-family: 'Inria Serif', Georgia, serif;
+    font-size: 11px;
+    padding: 2px 10px;
+    border-radius: 999px;
+    margin-bottom: 5px;
+}
+.badge-hadir  { background: #e8f5e9; color: #2e7d32; }
+.badge-ragu   { background: #fff8e1; color: #f57f17; }
+.badge-tidak  { background: #fce4ec; color: #b71c1c; }
+
+/* =============================================
+   TOAST NOTIFICATION
+   ============================================= */
+.toast {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%) translateY(16px);
+    background: #053827;
+    color: #fbf0da;
+    padding: 10px 24px;
+    border-radius: 999px;
+    font-family: 'Inria Serif', Georgia, serif;
+    font-size: 13px;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 9999;
+    pointer-events: none;
+    white-space: nowrap;
+    max-width: 90vw;
+    text-align: center;
+}
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* =============================================
+   MUSIC BUTTON — playing state spin
+   ============================================= */
+#music-btn.playing {
+    animation: spin-slow 4s linear infinite;
+}
+@keyframes spin-slow {
+    to { transform: rotate(360deg); }
+}
+
+/* =============================================
+   COPY BUTTON — copied state
+   ============================================= */
+.copy-btn.copied {
+    background-color: #2a7a50 !important;
+    color: #fbf0da !important;
+}
+
+/* =============================================
+   WISH CARD
+   ============================================= */
+.wish-card {
+  border: 2px solid #053827;
+  border-radius: 16px;
+  padding: 14px 18px;
+  margin-bottom: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: white;
+}
+
+.wish-avatar {
+  width: 32px;
+  height: 32px;
+  background: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.wish-name {
+  font-family: 'Inria Serif', Georgia, serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 3px;
+}
+
+.wish-text {
+  font-family: 'Inria Serif', Georgia, serif;
+  font-size: 12px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* =============================================
+   AOS OVERRIDE — ensure proper stacking
+   ============================================= */
+[data-aos] {
+  will-change: transform, opacity;
+}
