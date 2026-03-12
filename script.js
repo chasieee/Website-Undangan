@@ -45,6 +45,19 @@ function bukaUndangan() {
     }, 700);
 }
 
+// CUSTOM NAMA TAMU
+function setGuestName() {
+    const params = new URLSearchParams(window.location.search);
+    const guest = params.get("to");
+
+    const guestElement = document.getElementById("guest-name");
+
+    if (guest && guestElement) {
+        guestElement.textContent = decodeURIComponent(guest);
+    }
+}
+document.addEventListener("DOMContentLoaded", setGuestName);
+
 // =============================================
 // MUSIC
 // =============================================
