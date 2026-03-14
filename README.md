@@ -25,7 +25,7 @@ My Aunt's Wedding Invitation Website Mini Project
 ## Font
 * Heading : Tan Vivre Libre
 * body : Inria Serif
-* accent : Burgues Script
+* accent : Burgues Script / Sloop Script Pro
 
 ## Font Sizing
 * body : 16 px
